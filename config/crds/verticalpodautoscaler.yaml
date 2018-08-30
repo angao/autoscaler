@@ -1,0 +1,80 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: verticalpodautoscalers.autoscaling.suning.com
+spec:
+  group: autoscaling.suning.com
+  names:
+    kind: VerticalPodAutoscaler
+    plural: verticalpodautoscalers
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            deploymentName:
+              type: string
+            ipSet:
+              items:
+                type: string
+              type: array
+            resources:
+              properties:
+                containers:
+                  items:
+                    properties:
+                      containerName:
+                        type: string
+                      image:
+                        type: string
+                      resources:
+                        type: object
+                    type: object
+                  type: array
+              type: object
+            scaleTimestamp:
+              type: string
+            strategy:
+              properties:
+                phase:
+                  type: string
+                type:
+                  type: string
+              type: object
+          type: object
+        status:
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastUpdateTime:
+                    format: date-time
+                    type: string
+                  message:
+                    type: string
+                  reason:
+                    type: string
+                type: object
+              type: array
+            updated:
+              type: boolean
+          type: object
+      required:
+      - spec
+      type: object
+  version: v1alpha1
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

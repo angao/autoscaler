@@ -1,0 +1,15 @@
+apiVersion: autoscaling.suning.com/v1alpha1
+kind: VerticalPodAutoscaler
+metadata:
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: podscale
+  namespace: default
+spec:
+  deploymentName: site
+  ipSet:
+    - "172.17.0.15"
+    - "172.17.0.16"
+  strategy:
+    type: PodDelete
+    phase: Binding
