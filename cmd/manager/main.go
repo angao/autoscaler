@@ -42,7 +42,7 @@ func main() {
 		glog.Fatal(err)
 	}
 
-	glog.V(2).Info("Registering Components.")
+	glog.Info("Registering Components.")
 
 	// Setup Scheme for all resources
 	if err := apis.AddToScheme(mgr.GetScheme()); err != nil {
@@ -54,7 +54,7 @@ func main() {
 		glog.Fatal(err)
 	}
 
-	glog.V(2).Info("Starting the Cmd.")
+	glog.Info("Starting the Cmd.")
 
 	// Start the Cmd
 	glog.Fatal(mgr.Start(signals.SetupSignalHandler()))
